@@ -1,0 +1,6 @@
+framework module Pods_RN8818 {
+  umbrella header "Pods-RN8818-umbrella.h"
+
+  export *
+  module * { export * }
+}
