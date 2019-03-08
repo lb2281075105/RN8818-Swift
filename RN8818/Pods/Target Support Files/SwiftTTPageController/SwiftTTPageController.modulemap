@@ -1,0 +1,6 @@
+framework module SwiftTTPageController {
+  umbrella header "SwiftTTPageController-umbrella.h"
+
+  export *
+  module * { export * }
+}
