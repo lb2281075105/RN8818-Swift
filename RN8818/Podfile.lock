@@ -1,20 +1,51 @@
 PODS:
-  - Alamofire (4.8.0)
+  - Alamofire (4.5.0)
+  - Kingfisher (3.13.0)
+  - MBProgressHUD (1.1.0)
+  - MJRefresh (3.1.12)
+  - RxCocoa (3.0.0):
+    - RxSwift (~> 3.0)
+  - RxDataSources (1.0.4):
+    - RxCocoa (~> 3.0)
+    - RxSwift (~> 3.0)
+  - RxSwift (3.0.0)
+  - SVProgressHUD (2.1.2)
   - SwiftyJSON (4.2.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (= 4.5)
+  - Kingfisher (= 3.13.0)
+  - MBProgressHUD (~> 1.1.0)
+  - MJRefresh (= 3.1.12)
+  - RxCocoa (= 3.0)
+  - RxDataSources (~> 1.0.4)
+  - RxSwift (= 3.0)
+  - SVProgressHUD (~> 2.1.2)
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Kingfisher
+    - MBProgressHUD
+    - MJRefresh
+    - RxCocoa
+    - RxDataSources
+    - RxSwift
+    - SVProgressHUD
     - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
+  Kingfisher: 7eebf6000ac64401839f10da37f21eefa7d88970
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
+  RxCocoa: 0a2f3ae381cf16f4021a4cee7a4420f83058a965
+  RxDataSources: b3389acc5fe2eefb8fcd81a2b76a876ad08bc82a
+  RxSwift: a930cd662f5b4a7ca9dc3518585dba91dadf497c
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
 
-PODFILE CHECKSUM: 680ec5116746a06521fb463c90d913868c91f3e1
+PODFILE CHECKSUM: c721e19e767ca889e08a5283861a6c6e4f43fae7
 
 COCOAPODS: 1.5.3

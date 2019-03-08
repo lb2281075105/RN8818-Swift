@@ -1,7 +1,7 @@
 //
 //  Request.swift
 //
-//  Copyright (c) 2014-2018 Alamofire Software Foundation (http://alamofire.org/)
+//  Copyright (c) 2014-2016 Alamofire Software Foundation (http://alamofire.org/)
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -102,7 +102,7 @@ open class Request {
     open var task: URLSessionTask? { return delegate.task }
 
     /// The session belonging to the underlying task.
-    public let session: URLSession
+    open let session: URLSession
 
     /// The request sent or to be sent to the server.
     open var request: URLRequest? { return task?.originalRequest }
@@ -184,7 +184,7 @@ open class Request {
     /// - parameter password: The password.
     ///
     /// - returns: A tuple with Authorization header and credential value if encoding succeeds, `nil` otherwise.
-    open class func authorizationHeader(user: String, password: String) -> (key: String, value: String)? {
+    open static func authorizationHeader(user: String, password: String) -> (key: String, value: String)? {
         guard let data = "\(user):\(password)".data(using: .utf8) else { return nil }
 
         let credential = data.base64EncodedString(options: [])
@@ -293,12 +293,11 @@ extension Request: CustomDebugStringConvertible {
 
             if let credentials = credentialStorage.credentials(for: protectionSpace)?.values {
                 for credential in credentials {
-                    guard let user = credential.user, let password = credential.password else { continue }
-                    components.append("-u \(user):\(password)")
+                    components.append("-u \(credential.user!):\(credential.password!)")
                 }
             } else {
-                if let credential = delegate.credential, let user = credential.user, let password = credential.password {
-                    components.append("-u \(user):\(password)")
+                if let credential = delegate.credential {
+                    components.append("-u \(credential.user!):\(credential.password!)")
                 }
             }
         }
@@ -309,27 +308,26 @@ extension Request: CustomDebugStringConvertible {
                 let cookies = cookieStorage.cookies(for: url), !cookies.isEmpty
             {
                 let string = cookies.reduce("") { $0 + "\($1.name)=\($1.value);" }
-
-            #if swift(>=3.2)
-                components.append("-b \"\(string[..<string.index(before: string.endIndex)])\"")
-            #else
                 components.append("-b \"\(string.substring(to: string.characters.index(before: string.endIndex)))\"")
-            #endif
             }
         }
 
         var headers: [AnyHashable: Any] = [:]
 
-        session.configuration.httpAdditionalHeaders?.filter {  $0.0 != AnyHashable("Cookie") }
-                                                    .forEach { headers[$0.0] = $0.1 }
+        if let additionalHeaders = session.configuration.httpAdditionalHeaders {
+            for (field, value) in additionalHeaders where field != AnyHashable("Cookie") {
+                headers[field] = value
+            }
+        }
 
-        request.allHTTPHeaderFields?.filter { $0.0 != "Cookie" }
-                                    .forEach { headers[$0.0] = $0.1 }
+        if let headerFields = request.allHTTPHeaderFields {
+            for (field, value) in headerFields where field != "Cookie" {
+                headers[field] = value
+            }
+        }
 
-        components += headers.map {
-            let escapedValue = String(describing: $0.value).replacingOccurrences(of: "\"", with: "\\\"")
-
-            return "-H \"\($0.key): \(escapedValue)\""
+        for (field, value) in headers {
+            components.append("-H \"\(field): \(value)\"")
         }
 
         if let httpBodyData = request.httpBody, let httpBody = String(data: httpBodyData, encoding: .utf8) {
