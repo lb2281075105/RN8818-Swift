@@ -5,17 +5,17 @@ target 'RN8818' do
   use_frameworks!
 
   # Pods for RN8818
-  pod 'Alamofire', '4.5'
+  pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'SVProgressHUD', '~> 2.1.2'
-  pod 'MBProgressHUD', '~> 1.1.0'
+  pod 'SVProgressHUD'
+  pod 'MBProgressHUD'
   #pod 'LKDBHelper', '~> 2.4.2'
-  pod 'RxSwift', '3.0'
-  pod 'RxCocoa', '3.0'
-  pod 'RxDataSources', '~> 1.0.4'
-  pod 'MJRefresh','3.1.12'
-  pod 'Kingfisher', '3.13.0'
-  pod 'IQKeyboardManagerSwift', '5.0.0'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxDataSources'
+  pod 'MJRefresh'
+  pod 'Kingfisher'
+  pod 'IQKeyboardManagerSwift'
   pod 'SwiftTTPageController'
 
   ###第三方平台
