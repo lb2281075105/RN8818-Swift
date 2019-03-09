@@ -21,7 +21,7 @@ target 'RN8818' do
   ###第三方平台
   pod 'Bugly'
 
-#  pod 'mob_sharesdk'
+  pod 'mob_sharesdk'
   pod 'mob_sharesdk/ShareSDKUI'
   pod 'mob_sharesdk/ShareSDKPlatforms/QQ'
   pod 'mob_sharesdk/ShareSDKPlatforms/WeChat'
